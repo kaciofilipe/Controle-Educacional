@@ -35,6 +35,18 @@ No presente projeto, o principal problema a ser resolvido está no fato de as es
 - Lista Encadeada
 - Lista Duplamente Encadeada.
 
+## Dicas de como rodar o sistema
+O Sistema não utiliza nenhuma lib externa.
+
+Para Acessar o sistema compile em um terminal com:
+```
+    Make file
+```
+Depois basta executar com:
+```
+    make run
+```
+
 ## 📌progresso
 
 -   [x] Cadastro de Alunos
