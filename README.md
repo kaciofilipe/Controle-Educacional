@@ -16,23 +16,23 @@ No presente projeto, o principal problema a ser resolvido está no fato de as es
 ### Alunos
 - Cadastro de Alunos.
 - Consulta de Alunos.
-- Exclusãod de Alunos.
+- Exclusão de Alunos.
 
 ### Professores
 - Cadastro de Professores.
 - Consulta de Professores.
-- Exclusãod de Professores.
+- Exclusão de Professores.
 
 ### Biblioteca
 - Cadastro de Livros.
 - Consulta de Livros.
-- Exclusãod de Livros.
+- Exclusão de Livros.
 - Emprestimo de Livros para Alunos e Professores.
 - Finalização do Emprestimo dos Livros para Alunos e Professores.
 
 ## Conteudos Utilizados
-- Filas
-- Lista Encadeada
+- Filas.
+- Lista Encadeada.
 - Lista Duplamente Encadeada.
 
 
