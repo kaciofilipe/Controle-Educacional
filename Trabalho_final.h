@@ -1,0 +1,43 @@
+typedef struct emprestimo Emprestimo;
+typedef struct livro Livro;
+typedef struct aluno Aluno;
+typedef struct professor Professor;
+
+Livro* inicializaLivro();
+Aluno* inicializaAluno();
+Professor* inicializaProfessor();
+int vazia(Emprestimo* e);
+void libera(Emprestimo* e);
+Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestimo* e);
+Emprestimo* criaFila();
+int incr(int i);
+Emprestimo* completaEmprestimo(Emprestimo* e, char* nomeL, char* nomeEmp);
+Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL);
+Emprestimo* retiraFila(Emprestimo* e);
+char* buscaAluno(Aluno* a, double cpf);
+char* buscaProf(Professor* p, double cpf);
+Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e);
+Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l);
+Livro* fimEmprestimo(Livro* l);
+void imprimeNomeFila(Emprestimo* e);
+void imprimeLista(Livro* l);
+Livro* emprestimos(Aluno* a, Professor* p, Livro* l);
+Livro* insereLivro(Livro* l, char* nome, char* autor, double cod);
+Aluno* InsereAluno(Aluno* a, char* nome, double data, double cpf);
+Professor* InsereProfessor(Professor* p, char* nome, char* materia, double data, double cpf);
+Professor* CriaProfessor(Professor* p);
+Aluno* CriaAluno(Aluno* a);
+Livro* CriaLivro(Livro* l);
+void imprimeAlunos(Aluno* a);
+void consultarAluno(Aluno* a);
+Aluno* excluirAluno(Aluno* a);
+void consultarProfessor(Professor* p);
+Professor* excluirProfessor(Professor* p1);
+Aluno* alunoGeral(Aluno* a);
+Professor* professorGeral(Professor* p);
+void consultarLivro(Livro* l);
+Livro* excluirLivro(Livro* l);
+Livro* livroGeral(Livro* l);
+void menu(Aluno* Alunos, Professor* Professores, Livro* Livros);
+
+#endif // TRABALHO_FINAL_H_INCLUDED

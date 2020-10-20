@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <Trabalho_final.h>
 
 struct emprestimo{
     char nomeLivro[100];
@@ -8,8 +9,6 @@ struct emprestimo{
     int ini, fim;
     float vet[10];
 };
-
-typedef struct emprestimo Emprestimo;
 
 struct livro{
     double Cod;
@@ -20,16 +19,12 @@ struct livro{
     struct livro* prox;
 };
 
-typedef struct livro Livro;
-
 struct aluno{
     char Nome[100];
     double DataNascimento;
     double CpF;
     struct aluno* prox;
 };
-
-typedef struct aluno Aluno;
 
 struct professor{
     char Nome[100];
@@ -38,8 +33,6 @@ struct professor{
     double CpF;
     struct professor* prox;
 };
-
-typedef struct professor Professor;
 
 Livro* inicializaLivro(){
     return NULL;
