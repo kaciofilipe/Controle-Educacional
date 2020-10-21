@@ -225,7 +225,6 @@ Livro* fimEmprestimo(Livro* l){
     Livro* aux;
     Livro* l1;
     int i = 0;
-    Emprestimo* e;
 
     l1 = inicializaLivro();
 
@@ -245,8 +244,7 @@ Livro* fimEmprestimo(Livro* l){
 
     for(aux = l; aux != NULL; aux = aux->prox){
         if(aux->Cod == cod){
-            e = aux->filaEmprestimo;
-	    aux->filaEmprestimo = retiraFila(e);
+            aux->filaEmprestimo = retiraFila(aux->filaEmprestimo);
         };
 	l1 = insereEmprestimo(l1, aux->Nome, aux->Autor, aux->Cod, aux->filaEmprestimo);
     };
@@ -254,12 +252,13 @@ Livro* fimEmprestimo(Livro* l){
 };
 
 void imprimeNomeFila(Emprestimo* e){
-    int i;
+    int i, j = 1;
 
     printf("\nLista de espera do livro %s:\n", e->nomeLivro);
 
-    for(i = 0; i != e->fim; i++){
-	printf("%d: %s\n", (i+1), e->nomeEmpres[i].nome);
+    for(i = e->ini; i != e->fim; i++){
+	printf("%d: %s\n", j, e->nomeEmpres[i].nome);
+	j++;
     }
 }
 
