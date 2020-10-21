@@ -3,11 +3,14 @@
 #include <string.h>
 #include "Trabalho_final.h"
 
+struct nomeEmprestimo{
+    char nome[100];
+};
+
 struct emprestimo{
     char nomeLivro[100];
-    char nomeEmprestimo[100];
+    NomeEmprestimo nomeEmpres[10];
     int ini, fim;
-    float vet[10];
 };
 
 struct livro{
@@ -71,7 +74,7 @@ Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestim
 
 Emprestimo* criaFila(){
     Emprestimo* e = (Emprestimo*) malloc(sizeof(Emprestimo));
-    e->ini = e->fim  = 0;
+    e->ini = e->fim = 0;
     return e;
 };
 
@@ -84,15 +87,14 @@ int incr(int i){
 };
 
 Emprestimo* completaEmprestimo(Emprestimo* e, char* nomeL, char* nomeEmp){
-    e->vet[e->fim] = incr(e->fim);
+    strcpy(e->nomeEmpres[e->fim].nome, nomeEmp);
     strcpy(e->nomeLivro, nomeL);
-    strcpy(e->nomeEmprestimo, nomeEmp);
     e->fim = incr(e->fim);
     return e;
 };
 
 Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL){
-    if(incr(e->fim) == e->ini){
+    if(incr(e->fim) == 0){
 	printf("\nCapacidade da fila estoutou\n");
 	return e;
     };
@@ -110,29 +112,50 @@ Emprestimo* retiraFila(Emprestimo* e){
     return e;
 };
 
-char* buscaAluno(Aluno* a, double cpf){
+int existeAluno(Aluno* a, double cpf){
     Aluno* aux;
 
     for(aux = a; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
-	    return aux->Nome;
+	    return 1;
         }else{
-	    return "**teste**";
+	    return 0;
 	};
     };
 };
 
-char* buscaProf(Professor* p, double cpf){
+int existeProf(Professor* p, double cpf){
     Professor* aux;
 
     for(aux = p; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
-	    return aux->Nome;
+	    return 1;
         }else{
-            return "**teste**";
+            return 0;
         };
     };
 };
+
+char* buscaNomeAluno(Aluno* a, double cpf){
+    Aluno* aux;
+
+    for(aux = a; aux != NULL; aux = aux->prox){
+        if(aux->CpF == cpf){
+            return aux->Nome;
+        };
+    };
+};
+
+char* buscaNomeProf(Professor* p, double cpf){
+    Professor* aux;
+
+    for(aux = p; aux != NULL; aux = aux->prox){
+        if(aux->CpF == cpf){
+            return aux->Nome;
+        };
+    };
+};
+
 
 Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e){
     Livro* l1;
@@ -154,7 +177,7 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
     char nomeAluno[100], nomeProf[100];
     Emprestimo* e;
     Livro* aux;
-    int i = 0;
+    int i = 0, Aluno, Prof;
 
     printf("\nDigite o CPF do aluno/professor que deseja entrar na fila de emprestimo:\n");
     scanf("%lf", &cpf);
@@ -178,19 +201,22 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
         };
     };
 
-    strcpy(nomeAluno, buscaAluno(a, cpf));
-    strcpy(nomeProf, buscaProf(p, cpf));
+    Aluno = existeAluno(a, cpf);
+    Prof = existeProf(p, cpf);
 
-    if(nomeAluno == nomeProf){
-	printf("\nAluno ou professor nao existente\n");
-	return l;
-    }
-
-    if(nomeAluno != "**teste**"){
+    if(Aluno != 0){
+	strcpy(nomeAluno, buscaNomeAluno(a, cpf));
 	l = fazEmprestimo(nomeAluno, l, cod, e);
-    }else{
-	l = fazEmprestimo(nomeProf, l, cod, e);
+	return l;
     };
+
+    if(Prof != 0){
+	strcpy(nomeProf, buscaNomeProf(p, cpf));
+	l = fazEmprestimo(nomeProf, l, cod, e);
+	return l;
+    };
+
+    printf("\nAluno ou professor nao existente\n");
     return l;
 };
 
@@ -232,9 +258,8 @@ void imprimeNomeFila(Emprestimo* e){
 
     printf("\nLista de espera do livro %s:\n", e->nomeLivro);
 
-    for(i = e->fim; i != e->ini; i--){
-	printf("%d: %s\n", i, e->nomeEmprestimo);
-	e->fim -= 1;
+    for(i = 0; i != e->fim; i++){
+	printf("%d: %s\n", (i+1), e->nomeEmpres[i].nome);
     }
 }
 
@@ -263,6 +288,10 @@ void imprimeLista(Livro* l){
             e = aux->filaEmprestimo;
         };
     };
+
+    if(vazia(e)){
+	return;
+    }
 
     imprimeNomeFila(e);
 };

@@ -14,6 +14,9 @@ typedef struct aluno Aluno;
 /* A estrultura Professor é uma lista encadeada que guarda as informações do professor*/
 typedef struct professor Professor;
 
+/* A estrultura NomeEmprestimo guarda o nome do usuario na fila de emprestimo */
+typedef struct nomeEmprestimo NomeEmprestimo;
+
 /* As funções inicializaLivro(), inicializaAluno() e inicializaProfessor() iniciam as tres estrulturas (Livro, Aluno, Professor) com valor NULL */
 Livro* inicializaLivro();
 Aluno* inicializaAluno();
@@ -37,9 +40,13 @@ Emprestimo* completaEmprestimo(Emprestimo* e, char* nomeL, char* nomeEmp);
 Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL);
 Emprestimo* retiraFila(Emprestimo* e);
 
+/* As funções existeAluno() e existeProf() verificam a existencia de um deles de acordo com o cpf */
+int existeAluno(Aluno* a, double cpf);
+int existeProf(Professor* p, double cpf);
+
 /* As funções buscaAluno() e buscaProfessor() retornam o nome do aluno ou professor conforme o CPF informado */
-char* buscaAluno(Aluno* a, double cpf);
-char* buscaProf(Professor* p, double cpf);
+char* buscaNomeAluno(Aluno* a, double cpf);
+char* buscaNomeProf(Professor* p, double cpf);
 
 /* As funções fazEmprestimo() e novoEmprestimo são responsaveis por recriar a lista de livros, agora com a nova fila do livro especificado e especificar o CPF do aluno ou professor e o codigo do livro, consecutivamente */
 Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e);
