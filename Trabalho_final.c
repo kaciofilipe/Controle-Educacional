@@ -53,8 +53,38 @@ int vazia(Emprestimo* e){
     return (e->ini  == e->fim);
 };
 
-void libera(Emprestimo* e){
-    free(e);
+Livro* limpaEmprestimo(Livro* l){
+    double cod;
+    int i = 0;
+    Livro* aux;
+    Livro* l1;
+
+    l1 = inicializaLivro();
+
+    printf("\nDigite o codigo do livro que deseja esvaziar a lista de emprestimo\n");
+    scanf("%lf", &cod);
+
+    for(aux = l; aux != NULL; aux = aux->prox){
+        if(aux->Cod == cod){
+            i = 1;
+        };
+    };
+
+    if(i == 0){
+        printf("\nLivro nao existente\n");
+        return l;
+    };
+
+
+    for(aux = l; aux != NULL; aux = aux->prox){
+        if(aux->Cod == cod){
+            aux->filaEmprestimo = criaFila();
+        };
+        l1 = insereEmprestimo(l1, aux->Nome, aux->Autor, aux->Cod, aux->filaEmprestimo);
+    };
+    printf("\nFila esvaziada\n");
+    return l1;
+
 };
 
 Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestimo* e){
@@ -99,6 +129,7 @@ Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL){
 	return e;
     };
     e = completaEmprestimo(e, nomeL, nomeEmp);
+    printf("\nEmprestimo colocado na fila\n");
     return e;
 };
 
@@ -225,6 +256,7 @@ Livro* fimEmprestimo(Livro* l){
     Livro* aux;
     Livro* l1;
     int i = 0;
+    Emprestimo* e;
 
     l1 = inicializaLivro();
 
@@ -244,10 +276,22 @@ Livro* fimEmprestimo(Livro* l){
 
     for(aux = l; aux != NULL; aux = aux->prox){
         if(aux->Cod == cod){
+            e = aux->filaEmprestimo;
+        };
+    };
+
+    if(vazia(e)){
+        printf("\nFila de emprestimo vazia\n");
+        return l;
+    }
+
+    for(aux = l; aux != NULL; aux = aux->prox){
+        if(aux->Cod == cod){
             aux->filaEmprestimo = retiraFila(aux->filaEmprestimo);
         };
 	l1 = insereEmprestimo(l1, aux->Nome, aux->Autor, aux->Cod, aux->filaEmprestimo);
     };
+    printf("\nEmprestimo finalizado\n");
     return l1;
 };
 
@@ -289,6 +333,7 @@ void imprimeLista(Livro* l){
     };
 
     if(vazia(e)){
+	printf("\nFila de emprestimo vazia\n");
 	return;
     }
 
@@ -298,7 +343,7 @@ void imprimeLista(Livro* l){
 Livro* emprestimos(Aluno* a, Professor* p, Livro* l){
     int opcao;
 
-    printf("\nMenu de emprestimos\nEscolha o que deseja fazer:\n1: Fazer um novo emprestimo\n2: Finalizar o primeiro emprestimo\n3: Ver lista de emprestimos\n4: Voltar ao menu principal\n");
+    printf("\nMenu de emprestimos\nEscolha o que deseja fazer:\n1: Fazer um novo emprestimo\n2: Finalizar o emprestimo de um livro\n3: Ver lista de emprestimos\n4: Limpar fila de emprestimo\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -321,6 +366,7 @@ Livro* emprestimos(Aluno* a, Professor* p, Livro* l){
 	    break;
 
 	case 4:
+	    l = limpaEmprestimo(l);
 	    return l;
 	    break;
 
@@ -372,11 +418,6 @@ Professor* CriaProfessor(Professor* p){
     printf("\nInsira os dados do professor\nNome:\n");
     setbuf(stdin, NULL);
     gets(nome);
-    while(nome == "**teste**"){
-	printf("Digite um nome valido:\n");
-	setbuf(stdin, NULL);
-	gets(nome);
-    }
     printf("Data de nascimento (sem barras):\n");
     scanf("%lf", &data);
     printf("Materia lecionada:\n");
@@ -396,11 +437,6 @@ Aluno* CriaAluno(Aluno* a){
     printf("\nInsira os dados do aluno\nNome:\n");
     setbuf(stdin, NULL);
     gets(nome);
-    while(nome == "**teste**"){
-        printf("Digite um nome valido:\n");
-        setbuf(stdin, NULL);
-        gets(nome);
-    }
     printf("Data de nascimento (sem barras):\n");
     scanf("%lf", &data);
     printf("CPF:\n");
@@ -426,13 +462,49 @@ Livro* CriaLivro(Livro* l){
     return insereLivro(l, nome, autor, cod);
 };
 
-
 void imprimeAlunos(Aluno* a){
-    Aluno* p;
-    for(p = a; p != NULL; p = p->prox){
-        printf("\n%s\n", p->Nome);
-        printf("%lf\n", p->DataNascimento);
-        printf("%lf\n", p->CpF);
+    Aluno* aux;
+    int i = 1;
+
+    printf("\nDados de todos os alunos:\n");
+
+    for(aux = a; aux != NULL; aux = aux->prox){
+	printf("\n%d:\n", i);
+        printf("Nome: %s\n", aux->Nome);
+        printf("Data de nascimento: %lf\n", aux->DataNascimento);
+        printf("CPF: %lf\n", aux->CpF);
+	i++;
+    };
+};
+
+void imprimeProfessores(Professor* p){
+    Professor* aux;
+    int i = 1;
+
+    printf("\nDados de todos os alunos:\n");
+
+    for(aux = p; aux != NULL; aux = aux->prox){
+        printf("\n%d:\n", i);
+        printf("Nome: %s\n", aux->Nome);
+        printf("Data de nascimento: %lf\n", aux->DataNascimento);
+        printf("CPF: %lf\n", aux->CpF);
+	printf("Materia lecionada: %s\n", aux->Materia);
+        i++;
+    };
+};
+
+void imprimeLivros(Livro* l){
+    Livro* aux;
+    int i = 1;
+
+    printf("\nDados de todos os livros:\n");
+
+    for(aux = l; aux != NULL; aux = aux->prox){
+        printf("\n%d:\n", i);
+        printf("Nome do livro: %s\n", aux->Nome);
+        printf("Nome do autor: %s\n", aux->Autor);
+        printf("Codigo: %lf\n", aux->Cod);
+        i++;
     };
 };
 
@@ -468,6 +540,7 @@ Aluno* excluirAluno(Aluno* a){
     };
 
     if(p == NULL){
+	printf("\nAluno nao cadastrado\n");
 	return a;
     };
 
@@ -477,6 +550,7 @@ Aluno* excluirAluno(Aluno* a){
 	ant->prox = p->prox;
     };
     free(p);
+    printf("\nAluno excluido\n");
     return a;
 };
 
@@ -513,6 +587,7 @@ Professor* excluirProfessor(Professor* p1){
     };
 
     if(p == NULL){
+	printf("\nProfessor nao cadastrado\n");
         return p1;
     };
 
@@ -522,13 +597,14 @@ Professor* excluirProfessor(Professor* p1){
         ant->prox = p->prox;
     };
     free(p);
+    printf("\nProfessor excluido\n");
     return p1;
 };
 
 
 Aluno* alunoGeral(Aluno* a){
     int opcao;
-    printf("\nMenu de alunos\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Voltar ao menu principal\n");
+    printf("\nMenu de alunos\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -551,6 +627,8 @@ Aluno* alunoGeral(Aluno* a){
 	    break;
 
 	case 4:
+	    imprimeAlunos(a);
+            a = alunoGeral(a);
 	    return a;
 	    break;
 
@@ -562,7 +640,7 @@ Aluno* alunoGeral(Aluno* a){
 
 Professor* professorGeral(Professor* p){
     int opcao;
-    printf("\nMenu de professores\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Voltar ao menu principal\n");
+    printf("\nMenu de professores\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -585,6 +663,8 @@ Professor* professorGeral(Professor* p){
             break;
 
         case 4:
+	    imprimeProfessores(p);
+            p = professorGeral(p);
             return p;
             break;
 
@@ -627,6 +707,7 @@ Livro* excluirLivro(Livro* l){
 
     if(p == NULL){
         return l;
+	printf("\nLivro nao cadastrado\n");
     };
 
     if(ant == NULL){
@@ -635,13 +716,14 @@ Livro* excluirLivro(Livro* l){
         ant->prox = p->prox;
     };
     free(p);
+    printf("\nLivro excluido\n");
     return l;
 };
 
 
 Livro* livroGeral(Livro* l){
     int opcao;
-    printf("\nMenu de livros\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Voltar ao menu principal\n");
+    printf("\nMenu de livros\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -664,6 +746,8 @@ Livro* livroGeral(Livro* l){
             break;
 
         case 4:
+	    imprimeLivros(l);
+            l = livroGeral(l);
             return l;
             break;
 

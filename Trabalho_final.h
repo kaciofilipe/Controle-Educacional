@@ -25,9 +25,11 @@ Professor* inicializaProfessor();
 /* A função cria fila inicializa a fila */
 Emprestimo* criaFila();
 
-/* As funções vazia() e libera() servem para verificar se a fila de emprestimo está vazia e zerar uma fila, consecutivamente */
+/* A função é responsavel por apagar a fila de emprestimo e reinicia-la */
+Livro* limpaEmprestimo(Livro* l);
+
+/* As funções vazia() serve para verificar se a fila de emprestimo está vazia */
 int vazia(Emprestimo* e);
-void libera(Emprestimo* e);
 
 /* A função insereEmprestimo() serve para colocar na fila os dados do emprestimo */
 Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestimo* e);
@@ -75,8 +77,10 @@ Professor* CriaProfessor(Professor* p);
 Aluno* CriaAluno(Aluno* a);
 Livro* CriaLivro(Livro* l);
 
-/* A função imprime Alunos imprime a lista com todos os alunos e suas informações */
+/* A função imprimeAlunos(), imprimeProfessores() e imprimeLivros() imprimem a lista com todos os alunos/professores/livros e suas informações */
 void imprimeAlunos(Aluno* a);
+void imprimeProfessores(Professor* p);
+void imprimeLivros(Livro* l);
 
 /* As funções consultarAluno() e consultarProfessor() trazem as informações destes a partir do CPF indicado e a função consultarLivro() traz as informações do livro determinado pelo codigo */
 void consultarAluno(Aluno* a);
