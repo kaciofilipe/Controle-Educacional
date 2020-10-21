@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <Trabalho_final.h>
+#include "Trabalho_final.h"
 
 struct emprestimo{
     char nomeLivro[100];
@@ -115,9 +115,9 @@ char* buscaAluno(Aluno* a, double cpf){
 
     for(aux = a; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
-            return aux->Nome;
+	    return aux->Nome;
         }else{
-	    return NULL;
+	    return "**teste**";
 	};
     };
 };
@@ -127,9 +127,9 @@ char* buscaProf(Professor* p, double cpf){
 
     for(aux = p; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
-            return aux->Nome;
+	    return aux->Nome;
         }else{
-            return NULL;
+            return "**teste**";
         };
     };
 };
@@ -140,7 +140,7 @@ Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e){
 
     l1 = inicializaLivro();
 
-   for(aux = l; aux != NULL; aux = aux->prox){
+    for(aux = l; aux != NULL; aux = aux->prox){
         if(aux->Cod == cod){
             aux->filaEmprestimo = insereFila(e, nome, aux->Nome);
         };
@@ -154,7 +154,7 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
     char nomeAluno[100], nomeProf[100];
     Emprestimo* e;
     Livro* aux;
-    int i = NULL;
+    int i = 0;
 
     printf("\nDigite o CPF do aluno/professor que deseja entrar na fila de emprestimo:\n");
     scanf("%lf", &cpf);
@@ -167,7 +167,7 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
         };
     };
 
-    if(i == NULL){
+    if(i == 0){
 	printf("\nLivro nao existente\n");
 	return l;
     };
@@ -181,7 +181,12 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
     strcpy(nomeAluno, buscaAluno(a, cpf));
     strcpy(nomeProf, buscaProf(p, cpf));
 
-    if(nomeAluno != NULL){
+    if(nomeAluno == nomeProf){
+	printf("\nAluno ou professor nao existente\n");
+	return l;
+    }
+
+    if(nomeAluno != "**teste**"){
 	l = fazEmprestimo(nomeAluno, l, cod, e);
     }else{
 	l = fazEmprestimo(nomeProf, l, cod, e);
@@ -193,7 +198,7 @@ Livro* fimEmprestimo(Livro* l){
     double cod;
     Livro* aux;
     Livro* l1;
-    int i = NULL;
+    int i = 0;
     Emprestimo* e;
 
     l1 = inicializaLivro();
@@ -207,7 +212,7 @@ Livro* fimEmprestimo(Livro* l){
         };
     };
 
-    if(i == NULL){
+    if(i == 0){
         printf("\nLivro nao existente\n");
         return l;
     };
@@ -235,7 +240,7 @@ void imprimeNomeFila(Emprestimo* e){
 
 void imprimeLista(Livro* l){
     double cod;
-    int i = NULL;
+    int i = 0;
     Emprestimo* e;
     Livro* aux;
 
@@ -248,7 +253,7 @@ void imprimeLista(Livro* l){
         };
     };
 
-    if(i == NULL){
+    if(i == 0){
         printf("\nLivro nao existente\n");
         return;
     };
@@ -339,6 +344,11 @@ Professor* CriaProfessor(Professor* p){
     printf("\nInsira os dados do professor\nNome:\n");
     setbuf(stdin, NULL);
     gets(nome);
+    while(nome == "**teste**"){
+	printf("Digite um nome valido:\n");
+	setbuf(stdin, NULL);
+	gets(nome);
+    }
     printf("Data de nascimento (sem barras):\n");
     scanf("%lf", &data);
     printf("Materia lecionada:\n");
@@ -358,6 +368,11 @@ Aluno* CriaAluno(Aluno* a){
     printf("\nInsira os dados do aluno\nNome:\n");
     setbuf(stdin, NULL);
     gets(nome);
+    while(nome == "**teste**"){
+        printf("Digite um nome valido:\n");
+        setbuf(stdin, NULL);
+        gets(nome);
+    }
     printf("Data de nascimento (sem barras):\n");
     scanf("%lf", &data);
     printf("CPF:\n");
