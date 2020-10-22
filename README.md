@@ -35,18 +35,16 @@ No presente projeto, o principal problema a ser resolvido está no fato de as es
 - Lista Encadeada
 - Lista Duplamente Encadeada.
 
-## Dicas de como rodar o sistema
+## 💻 como rodar o Sistema
 O Sistema não utiliza nenhuma lib externa.
+o Sistema foi rodado no ubuntu 20.04
+certifique-se que tem o gcc instalado, caso não tenha, siga essas instruçoes - gcc.
 
 Para Acessar o sistema compile em um terminal com:
 ```
-    Make file
+     make all
+    ./SISTEMA-EDUCACIONAL
 ```
-Depois basta executar com:
-```
-    make run
-```
-
 ## 📌progresso
 
 -   [x] Cadastro de Alunos
@@ -60,6 +58,8 @@ Depois basta executar com:
 -   [x] Exclusão de Livros
 -   [x] Emprestimo de Livros para Alunos e Professores.
 -   [ ] Projeto Escrito
+
+
 
 
 
