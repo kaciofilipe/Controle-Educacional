@@ -36,9 +36,9 @@ No presente projeto, o principal problema a ser resolvido está no fato de as es
 - Lista Duplamente Encadeada.
 
 ## 💻 como rodar o Sistema
-O Sistema não utiliza nenhuma lib externa.
-o Sistema foi rodado no ubuntu 20.04
-certifique-se que tem o gcc instalado, caso não tenha, siga essas instruçoes - gcc.
+- O Sistema não utiliza nenhuma lib externa.
+- O Sistema foi rodado no ubuntu 20.04
+- Certifique-se que tem o gcc instalado, caso não tenha, siga essas instruçoes - gcc.
 
 Para Acessar o sistema compile em um terminal com:
 ```
