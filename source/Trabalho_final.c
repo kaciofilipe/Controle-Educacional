@@ -794,6 +794,8 @@ void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
 };
 
 void main(){
+    system("clear");
+	
     Aluno* Alunos;
     Livro* Livros;
     Professor* Professores;
