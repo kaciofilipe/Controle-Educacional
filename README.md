@@ -57,7 +57,7 @@ Para Acessar o sistema compile em um terminal com:
 -   [x] Consulta de Livros
 -   [x] Exclusão de Livros
 -   [x] Emprestimo de Livros para Alunos e Professores.
--   [ ] Projeto Escrito
+-   [x] Projeto Escrito
 
 
 
