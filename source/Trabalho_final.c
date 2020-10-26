@@ -149,10 +149,9 @@ int existeAluno(Aluno* a, double cpf){
     for(aux = a; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
 	    return 1;
-        }else{
-	    return 0;
 	};
     };
+    return 0;
 };
 
 int existeProf(Professor* p, double cpf){
@@ -161,10 +160,9 @@ int existeProf(Professor* p, double cpf){
     for(aux = p; aux != NULL; aux = aux->prox){
         if(aux->CpF == cpf){
 	    return 1;
-        }else{
-            return 0;
         };
     };
+    return 0;
 };
 
 char* buscaNomeAluno(Aluno* a, double cpf){
@@ -795,7 +793,7 @@ void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
 
 void main(){
     system("clear");
-	
+
     Aluno* Alunos;
     Livro* Livros;
     Professor* Professores;
