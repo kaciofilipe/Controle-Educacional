@@ -39,19 +39,19 @@ struct professor{
 
 Livro* inicializaLivro(){
     return NULL;
-};
+}
 
 Aluno* inicializaAluno(){
     return NULL;
-};
+}
 
 Professor* inicializaProfessor(){
     return NULL;
-};
+}
 
 int vazia(Emprestimo* e){
     return (e->ini  == e->fim);
-};
+}
 
 Livro* limpaEmprestimo(Livro* l){
     double cod;
@@ -85,7 +85,7 @@ Livro* limpaEmprestimo(Livro* l){
     printf("\nFila esvaziada\n");
     return l1;
 
-};
+}
 
 Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestimo* e){
     Livro* novo = (Livro*) malloc(sizeof(Livro));
@@ -99,14 +99,14 @@ Livro* insereEmprestimo(Livro* l, char* nome, char* autor, double cod, Emprestim
         l->ant = novo;
     };
     return novo;
-};
+}
 
 
 Emprestimo* criaFila(){
     Emprestimo* e = (Emprestimo*) malloc(sizeof(Emprestimo));
     e->ini = e->fim = 0;
     return e;
-};
+}
 
 int incr(int i){
     if(i == 9){
@@ -114,14 +114,14 @@ int incr(int i){
     }else{
 	return i+1;
     };
-};
+}
 
 Emprestimo* completaEmprestimo(Emprestimo* e, char* nomeL, char* nomeEmp){
     strcpy(e->nomeEmpres[e->fim].nome, nomeEmp);
     strcpy(e->nomeLivro, nomeL);
     e->fim = incr(e->fim);
     return e;
-};
+}
 
 Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL){
     if(incr(e->fim) == 0){
@@ -131,7 +131,7 @@ Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL){
     e = completaEmprestimo(e, nomeL, nomeEmp);
     printf("\nEmprestimo colocado na fila\n");
     return e;
-};
+}
 
 Emprestimo* retiraFila(Emprestimo* e){
     if(vazia(e)){
@@ -141,7 +141,7 @@ Emprestimo* retiraFila(Emprestimo* e){
 
     e->ini = incr(e->ini);
     return e;
-};
+}
 
 int existeAluno(Aluno* a, double cpf){
     Aluno* aux;
@@ -152,7 +152,7 @@ int existeAluno(Aluno* a, double cpf){
 	};
     };
     return 0;
-};
+}
 
 int existeProf(Professor* p, double cpf){
     Professor* aux;
@@ -163,7 +163,7 @@ int existeProf(Professor* p, double cpf){
         };
     };
     return 0;
-};
+}
 
 char* buscaNomeAluno(Aluno* a, double cpf){
     Aluno* aux;
@@ -173,7 +173,7 @@ char* buscaNomeAluno(Aluno* a, double cpf){
             return aux->Nome;
         };
     };
-};
+}
 
 char* buscaNomeProf(Professor* p, double cpf){
     Professor* aux;
@@ -183,7 +183,7 @@ char* buscaNomeProf(Professor* p, double cpf){
             return aux->Nome;
         };
     };
-};
+}
 
 
 Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e){
@@ -199,7 +199,7 @@ Livro* fazEmprestimo(char* nome, Livro* l, double cod, Emprestimo* e){
 	l1 = insereEmprestimo(l1, aux->Nome, aux->Autor, aux->Cod, aux->filaEmprestimo);
     };
     return l1;
-};
+}
 
 Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
     double cpf, cod;
@@ -247,7 +247,7 @@ Livro* novoEmprestimo(Aluno* a, Professor* p, Livro* l){
 
     printf("\nAluno ou professor nao existente\n");
     return l;
-};
+}
 
 Livro* fimEmprestimo(Livro* l){
     double cod;
@@ -291,7 +291,7 @@ Livro* fimEmprestimo(Livro* l){
     };
     printf("\nEmprestimo finalizado\n");
     return l1;
-};
+}
 
 void imprimeNomeFila(Emprestimo* e){
     int i, j = 1;
@@ -336,7 +336,7 @@ void imprimeLista(Livro* l){
     }
 
     imprimeNomeFila(e);
-};
+}
 
 Livro* emprestimos(Aluno* a, Professor* p, Livro* l){
     int opcao;
@@ -372,7 +372,7 @@ Livro* emprestimos(Aluno* a, Professor* p, Livro* l){
 	    return l;
 	    break;
     };
-};
+}
 
 Livro* insereLivro(Livro* l, char* nome, char* autor, double cod){
     Livro* novo = (Livro*) malloc(sizeof(Livro));
@@ -386,7 +386,7 @@ Livro* insereLivro(Livro* l, char* nome, char* autor, double cod){
         l->ant = novo;
     };
     return novo;
-};
+}
 
 Aluno* InsereAluno(Aluno* a, char* nome, double data, double cpf){
     Aluno* novo = (Aluno*) malloc(sizeof(Aluno));
@@ -395,7 +395,7 @@ Aluno* InsereAluno(Aluno* a, char* nome, double data, double cpf){
     novo->CpF = cpf;
     novo->prox = a;
     return novo;
-};
+}
 
 Professor* InsereProfessor(Professor* p, char* nome, char* materia, double data, double cpf){
     Professor* novo = (Professor*) malloc(sizeof(Professor));
@@ -405,7 +405,7 @@ Professor* InsereProfessor(Professor* p, char* nome, char* materia, double data,
     novo->CpF = cpf;
     novo->prox = p;
     return novo;
-};
+}
 
 Professor* CriaProfessor(Professor* p){
     char nome[100];
@@ -425,7 +425,7 @@ Professor* CriaProfessor(Professor* p){
     scanf("%lf", &cpf);
 
     return InsereProfessor(p, nome, materia, data, cpf);
-};
+}
 
 Aluno* CriaAluno(Aluno* a){
     char nome[100];
@@ -441,7 +441,7 @@ Aluno* CriaAluno(Aluno* a){
     scanf("%lf", &cpf);
 
     return InsereAluno(a, nome, data, cpf);
-};
+}
 
 Livro* CriaLivro(Livro* l){
     char nome[100];
@@ -458,7 +458,7 @@ Livro* CriaLivro(Livro* l){
     scanf("%lf", &cod);
 
     return insereLivro(l, nome, autor, cod);
-};
+}
 
 void imprimeAlunos(Aluno* a){
     Aluno* aux;
@@ -469,11 +469,11 @@ void imprimeAlunos(Aluno* a){
     for(aux = a; aux != NULL; aux = aux->prox){
 	printf("\n%d:\n", i);
         printf("Nome: %s\n", aux->Nome);
-        printf("Data de nascimento: %lf\n", aux->DataNascimento);
-        printf("CPF: %lf\n", aux->CpF);
+        printf("Data de nascimento: %.0lf\n", aux->DataNascimento);
+        printf("CPF: %.0lf\n", aux->CpF);
 	i++;
     };
-};
+}
 
 void imprimeProfessores(Professor* p){
     Professor* aux;
@@ -484,12 +484,12 @@ void imprimeProfessores(Professor* p){
     for(aux = p; aux != NULL; aux = aux->prox){
         printf("\n%d:\n", i);
         printf("Nome: %s\n", aux->Nome);
-        printf("Data de nascimento: %lf\n", aux->DataNascimento);
-        printf("CPF: %lf\n", aux->CpF);
+        printf("Data de nascimento: %.0lf\n", aux->DataNascimento);
+        printf("CPF: %.0lf\n", aux->CpF);
 	printf("Materia lecionada: %s\n", aux->Materia);
         i++;
     };
-};
+}
 
 void imprimeLivros(Livro* l){
     Livro* aux;
@@ -501,10 +501,10 @@ void imprimeLivros(Livro* l){
         printf("\n%d:\n", i);
         printf("Nome do livro: %s\n", aux->Nome);
         printf("Nome do autor: %s\n", aux->Autor);
-        printf("Codigo: %lf\n", aux->Cod);
+        printf("Codigo: %.0lf\n", aux->Cod);
         i++;
     };
-};
+}
 
 void consultarAluno(Aluno* a){
     Aluno* aux;
@@ -516,13 +516,13 @@ void consultarAluno(Aluno* a){
     for(aux = a; aux != NULL; aux = aux->prox){
 	if(aux->CpF == cpf){
             printf("\nDados:\nNome: %s\n", aux->Nome);
-            printf("Data de nascimento: %lf\n", aux->DataNascimento);
-            printf("CPF: %lf\n", aux->CpF);
+            printf("Data de nascimento: %.0lf\n", aux->DataNascimento);
+            printf("CPF: %.0lf\n", aux->CpF);
 	    return;
 	};
     };
     printf("Aluno não cadastrado\n");
-};
+}
 
 Aluno* excluirAluno(Aluno* a){
     Aluno* ant = NULL;
@@ -550,7 +550,7 @@ Aluno* excluirAluno(Aluno* a){
     free(p);
     printf("\nAluno excluido\n");
     return a;
-};
+}
 
 void consultarProfessor(Professor* p){
     Professor* aux;
@@ -563,13 +563,13 @@ void consultarProfessor(Professor* p){
         if(aux->CpF == cpf){
             printf("\nDados:\nNome: %s\n", aux->Nome);
 	    printf("Materia lecionada: %s", aux->Materia);
-            printf("Data de nascimento: %lf\n", aux->DataNascimento);
-            printf("CPF: %lf\n", aux->CpF);
+            printf("Data de nascimento: %.0lf\n", aux->DataNascimento);
+            printf("CPF: %.0lf\n", aux->CpF);
             return;
         };
     };
     printf("Professor não cadastrado\n");
-};
+}
 
 Professor* excluirProfessor(Professor* p1){
     Professor* ant = NULL;
@@ -597,7 +597,7 @@ Professor* excluirProfessor(Professor* p1){
     free(p);
     printf("\nProfessor excluido\n");
     return p1;
-};
+}
 
 
 Aluno* alunoGeral(Aluno* a){
@@ -634,7 +634,7 @@ Aluno* alunoGeral(Aluno* a){
 	    return a;
 	    break;
     };
-};
+}
 
 Professor* professorGeral(Professor* p){
     int opcao;
@@ -670,7 +670,7 @@ Professor* professorGeral(Professor* p){
             return p;
             break;
     };
-};
+}
 
 void consultarLivro(Livro* l){
     Livro* aux;
@@ -683,12 +683,12 @@ void consultarLivro(Livro* l){
         if(aux->Cod == cod){
             printf("\nDados:\nNome: %s\n", aux->Nome);
             printf("Autor: %s", aux->Autor);
-            printf("Codigo: %lf\n", aux->Cod);
+            printf("Codigo: %.0lf\n", aux->Cod);
             return;
         };
     };
     printf("Livro não cadastrado\n");
-};
+}
 
 Livro* excluirLivro(Livro* l){
     Livro* ant = NULL;
@@ -716,7 +716,7 @@ Livro* excluirLivro(Livro* l){
     free(p);
     printf("\nLivro excluido\n");
     return l;
-};
+}
 
 
 Livro* livroGeral(Livro* l){
@@ -754,7 +754,7 @@ Livro* livroGeral(Livro* l){
             break;
     };
 
-};
+}
 
 void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
     int opcao;
@@ -789,7 +789,7 @@ void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
 	    menu(Alunos, Professores, Livros);
 	    break;
     };
-};
+}
 
 void main(){
     system("clear");
@@ -810,4 +810,4 @@ void main(){
     Livros = CriaLivro(Livros);
 
     menu(Alunos, Professores, Livros);
-};
+}

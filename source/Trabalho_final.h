@@ -2,19 +2,19 @@
 #ifndef TRABALHO_FINAL_H
 #define TRABALHO_FINAL_H
 
-/* A estrultura Emprestimo é uma fila para listar em ordem os pedidos de emprestimo com nome do livro e nome do aluno ou professor, com limite de 10 pedidos */
+/* A estrutura Emprestimo é uma fila para listar em ordem os pedidos de emprestimo com nome do livro e nome do aluno ou professor, com limite de 10 pedidos */
 typedef struct emprestimo Emprestimo;
 
-/* A estrultura Livro é uma lista duplamente encadeada que possui codigo do livro, nome, autor e sua propria fila de emprestimo */
+/* A estrutura Livro é uma lista duplamente encadeada que possui codigo do livro, nome, autor e sua propria fila de emprestimo */
 typedef struct livro Livro;
 
-/* A estrultura Aluno é uma lista encadeada que guarda informações do aluno */
+/* A estrutura Aluno é uma lista encadeada que guarda informações do aluno */
 typedef struct aluno Aluno;
 
-/* A estrultura Professor é uma lista encadeada que guarda as informações do professor*/
+/* A estrutura Professor é uma lista encadeada que guarda as informações do professor */
 typedef struct professor Professor;
 
-/* A estrultura NomeEmprestimo guarda o nome do usuario na fila de emprestimo */
+/* A estrutura NomeEmprestimo é uma estrutura do tipo TAD que guarda o nome do usuario na fila de emprestimo */
 typedef struct nomeEmprestimo NomeEmprestimo;
 
 /* As funções inicializaLivro(), inicializaAluno() e inicializaProfessor() iniciam as tres estrulturas (Livro, Aluno, Professor) com valor NULL */
