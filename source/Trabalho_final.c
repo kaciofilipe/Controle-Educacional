@@ -125,7 +125,7 @@ Emprestimo* completaEmprestimo(Emprestimo* e, char* nomeL, char* nomeEmp){
 
 Emprestimo* insereFila(Emprestimo* e, char* nomeEmp, char* nomeL){
     if(incr(e->fim) == 0){
-	printf("\nCapacidade da fila estoutou\n");
+	printf("\nCapacidade da fila estorou\n");
 	return e;
     };
     e = completaEmprestimo(e, nomeL, nomeEmp);
@@ -365,6 +365,7 @@ Livro* emprestimos(Aluno* a, Professor* p, Livro* l){
 
 	case 4:
 	    l = limpaEmprestimo(l);
+	    l = emprestimos(a, p, l);
 	    return l;
 	    break;
 
@@ -602,6 +603,7 @@ Professor* excluirProfessor(Professor* p1){
 
 Aluno* alunoGeral(Aluno* a){
     int opcao;
+
     printf("\nMenu de alunos\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
@@ -638,6 +640,7 @@ Aluno* alunoGeral(Aluno* a){
 
 Professor* professorGeral(Professor* p){
     int opcao;
+
     printf("\nMenu de professores\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
@@ -721,6 +724,7 @@ Livro* excluirLivro(Livro* l){
 
 Livro* livroGeral(Livro* l){
     int opcao;
+    system("clear");
     printf("\nMenu de livros\nEscolha o que deseja fazer:\n1: Cadastrar\n2: Consultar\n3: Excluir\n4: Ver lista completa\n5: Voltar ao menu principal\n");
     scanf("%d", &opcao);
 
@@ -758,26 +762,31 @@ Livro* livroGeral(Livro* l){
 
 void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
     int opcao;
-    printf("\nMenu principal\nEscolha a opção que deseja:\n1: Cadastrar, consultar ou excluir um aluno\n2: Cadastrar, consultar ou excluir um professor\n3: Cadastrar, consultar ou excluir um livro\n4: Gerenciamento de emprestimos de livros\n5: Finalizar o programa\n");
+    system("clear");
+    printf("Menu principal\nEscolha a opção que deseja:\n1: Cadastrar, consultar ou excluir um aluno\n2: Cadastrar, consultar ou excluir um professor\n3: Cadastrar, consultar ou excluir um livro\n4: Gerenciamento de emprestimos de livros\n5: Finalizar o programa\n");
     scanf("%d", &opcao);
 
     switch(opcao){
         case 1:
+            system("clear");
 	    Alunos = alunoGeral(Alunos);
 	    menu(Alunos, Professores, Livros);
 	    break;
 
 	case 2:
+            system("clear");
 	    Professores = professorGeral(Professores);
 	    menu(Alunos, Professores, Livros);
 	    break;
 
 	case 3:
+            system("clear");
 	    Livros = livroGeral(Livros);
 	    menu(Alunos, Professores, Livros);
 	    break;
 
 	case 4:
+            system("clear");
 	    Livros = emprestimos(Alunos, Professores, Livros);
 	    menu(Alunos, Professores, Livros);
 	    break;
@@ -786,6 +795,7 @@ void menu(Aluno* Alunos, Professor* Professores, Livro* Livros){
 	    break;
 
 	default:
+            system("clear");
 	    menu(Alunos, Professores, Livros);
 	    break;
     };
@@ -802,7 +812,7 @@ void main(){
     Professores = inicializaProfessor();
     Livros = inicializaLivro();
 
-    printf("\nBem vindo ao nosso Sistema Educacional\nPara começarmos precisamos cadastrar um aluno, um professor, e um livro\nVamos começar pela inserção de um aluno\n");
+    printf("Bem vindo ao nosso Sistema Educacional\nPara começarmos precisamos cadastrar um aluno, um professor, e um livro\nVamos começar pela inserção de um aluno\n");
     Alunos = CriaAluno(Alunos);
     printf("\nAgora vamos inserir um professor\n");
     Professores = CriaProfessor(Professores);
